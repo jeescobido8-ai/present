@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flowers for Valentines</title>
+<style>
+/* === BODY AND SECTION === */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #F9C8D9, #D0E5F3);  /* Soft pink-to-lavender gradient */
+    box-sizing: border-box;
+    overflow: hidden;
+    font-family: sans-serif;
+}
+
+/* === SECTION (FLOWER AREA) === */
+section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rotate 20s ease-in-out infinite alternate;  /* Slow alternating rotation */
+}
+
+/* === ROTATION ANIMATION (ALTERNATING DIRECTIONS) === */
+@keyframes rotate {
+    0% { transform: rotateZ(0deg); }
+    50% { transform: rotateZ(360deg); } /* Halfway rotation */
+    100% { transform: rotateZ(-360deg); } /* Alternate direction */
+}
+
+/* === OUTER DIVS (FLOWER PETALS) === */
+div {
+    position: absolute;
+    width: 120px; /* Fixed size for flower petals */
+    height: 120px;
+    border: 2px solid yellow;
+    animation: change 30s ease-in-out infinite forwards; /* Slow gentle hue shift with ease-in-out */
+    box-sizing: border-box;
+}
+
+/* === HUE ROTATION FOR OUTER DIVS === */
+@keyframes change {
+    0% { 
+        filter: hue-rotate(0deg); 
+        opacity: 1;  /* Start fully visible */
+    }
+    50% { 
+        filter: hue-rotate(180deg); 
+        opacity: 1;  /* Midway, still fully visible */
+    }
+    100% { 
+        filter: hue-rotate(360deg); 
+        opacity: 1;  /* End fully visible */
+    }
+}
+
+/* === OUTER PETALS (RESPONSIVE TRANSFORMS) === */
+div:nth-child(1) { 
+    background: linear-gradient(to bottom right, #0B3D91, #22D3EE);
+    border-radius: 50% 50% 0 50%;
+    transform: skew(23deg,23deg) translate(-60px,-60px);
+}
+div:nth-child(2) { 
+    background: linear-gradient(to bottom left, #0B3D91, #22D3EE);
+    border-radius: 50% 50% 50% 0;
+    transform: skew(-23deg,-23deg) translate(60px,-60px);
+}
+div:nth-child(3) { 
+    background: linear-gradient(to top right, #0B3D91, #22D3EE);
+    border-radius: 50% 0 50% 50%;
+    transform: skew(-23deg,-23deg) translate(-60px,60px);
+}
+div:nth-child(4) { 
+    background: linear-gradient(to top left, #0B3D91, #22D3EE);
+    border-radius: 0 50% 50% 50%;
+    transform: skew(23deg,23deg) translate(60px,60px);
+}
+div:nth-child(5) { 
+    background: linear-gradient(to bottom right, #0B3D91, #22D3EE);
+    border-radius: 50% 50% 0 50%;
+    transform: rotateZ(45deg) skew(23deg,23deg) translate(-60px,-60px);
+}
+div:nth-child(6) { 
+    background: linear-gradient(to bottom left, #0B3D91, #22D3EE);
+    border-radius: 50% 50% 50% 0;
+    transform: rotateZ(45deg) skew(-23deg,-23deg) translate(60px,-60px);
+}
+div:nth-child(7) { 
+    background: linear-gradient(to top right, #0B3D91, #22D3EE);
+    border-radius: 50% 0 50% 50%;
+    transform: rotateZ(45deg) skew(-23deg,-23deg) translate(-60px,60px);
+}
+div:nth-child(8) { 
+    background: linear-gradient(to top left, #0B3D91, #22D3EE);
+    border-radius: 0 50% 50% 50%;
+    transform: rotateZ(45deg) skew(23deg,23deg) translate(60px,60px);
+}
+
+/* === CENTER GLOW === */
+div:nth-child(9) {
+    width: 60px; /* Fixed size for center glow */
+    height: 60px;
+    border: 2px solid #FF7A59;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, #FFB199 0%, #FF7A59 65%);
+    filter: blur(8px);
+    animation: pulse 2s ease-in-out infinite alternate;
+    box-shadow: 0 0 25px #FF7A59, 0 0 50px #FFB199;
+}
+
+/* === PULSE ANIMATION (SUBTLE) === */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    100% { transform: scale(1.05); opacity: 1; }
+}
+
+/* === VALENTINE'S GREETING === */
+h1 {
+    position: absolute;
+    top: 1%; /* Give more space between the top and the flowers */
+    left: 50%;
+    transform: translateX(-50%); /* Center text horizontally */
+    color: #FF7A59;
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 122, 89, 0.7), 0 0 20px rgba(255, 122, 89, 0.5);
+    animation: fadeIn 3s ease-in-out;
+    width: 100%; /* Ensure the text stays within bounds */
+    z-index: 15; /* Make sure it appears above the flowers */
+}
+
+/* === GREETING FADE-IN ANIMATION === */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* === BOTTOM TEXT (NEW MESSAGE) === */
+h2 {
+    position: absolute;
+    bottom: 3%;  /* Position near the bottom */
+    left: 50%;
+    transform: translateX(-50%); /* Center text horizontally */
+    color: #D69A8D; /* Light peachish color to match theme */
+    font-size: 1.2rem;  /* Smaller font size for better visibility */
+    font-weight: normal;
+    text-align: center;
+    max-width: 90%; /* Prevents overflow */
+    animation: fadeInBottom 3s ease-in-out;  /* Gentle fade-in for the message */
+}
+
+/* === BOTTOM TEXT FADE-IN ANIMATION === */
+@keyframes fadeInBottom {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* === MEDIA QUERY FOR SMALL SCREENS === */
+@media (max-width: 400px) {
+    div {
+        transform: skew(15deg,15deg) translate(-5vw,-5vw);
+    }
+    div:nth-child(9) {
+        width: 50px;
+        height: 50px;
+        max-width: 50px;
+        max-height: 50px;
+    }
+    h1 {
+        font-size: 2rem;
+        top: 5%;  /* Adjust for smaller screens */
+    }
+    h2 {
+        font-size: 1rem;  /* Further reduce font size on mobile */
+    }
+}
+</style>
+</head>
+<body>
+<section>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</section>
+
+<!-- Valentine greeting -->
+<h1>Happy Valentine’s Day! 💖</h1>
+
+<!-- Bottom text -->
+<h2>I hope this flower brings a smile to your face and brightens your day just a little bit more.</h2>
+
+</body>
+</html>
